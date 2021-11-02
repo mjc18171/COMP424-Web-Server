@@ -13,14 +13,17 @@ cp .keys/id_ed25519.pub /home/mjc18171/.ssh
 sudo adduser stefk
 sudo usermod -aG sudo stefk
 passwd --delete steff
+cp .keys/stef.pub /home/stefk/.ssh
  
 sudo adduser krr74113
 sudo usermod -aG sudo
 passwd --delete krr74113
+cp .keys/kim.pub /home/krr74113/.ssh
  
 sudo adduser msn60002
 sudo usermod -aG sudo
 passwd --delete msn60002
+cp .keys/martini.pub /home/msn60002/.ssh
 
 #cp authorized keys into root
 cp .keys/authorized_keys /root/.ssh
@@ -56,9 +59,7 @@ sudo apt-get install php -y
 
 echo "Enabling Modules"
 sudo a2enmod alias
-sudo phpenmod mcrypt
 sudo a2enmod ssl
-sudo a2enmod headers
 sudo a2ensite default-ssl
  
 echo "Restarting Apache\n"
@@ -68,7 +69,9 @@ echo "Installing iptables"
 sudo apt-get install iptables
 
 echo "Installing OpenSSH"
-sudo apt-get install openssh
+sudo apt-get install openssh-server
+sudo systemctl enable ssh
+sudo systemctl start ssh
 
 echo "Installing wget"
 apt-get install wget
@@ -181,8 +184,5 @@ echo "Confirm snort version"
 
 echo "testing snort with the default config file"
 snort -c /usr/local/etc/snort/snort.lua
-
-
-echo 
 
 exit 0

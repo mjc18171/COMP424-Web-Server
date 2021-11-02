@@ -27,10 +27,10 @@ sudo iptables -A OUTPUT -p tcp --dport 25 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 25 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
 sudo iptables -A OUTPUT -p tcp --sport 25 -m conntrack --ctstate ESTABLISHED -j ACCEPT
 
-echo "Persisting Changes - every time you change rules you need to save to it can reload at reboot"
+#Persisting Changes - every time you change rules you need to save to it can reload at reboot
 sudo netfilter-persistent save
 
-echo "iptable implemention completed"
+echo "iptables implemention completed"
 
 echo ""
 exit 0
