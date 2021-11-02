@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Device Healer Inc.</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    html { height:200%; width:120%; overflow: scroll; }
+    body {font-size: 1.25rem; font-family: sans-serif; line-height: 150%; }
+    section { color: #fff; text-align: center; }
+    div { height: 100%; }
+    article { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; padding: 20px; }
+    h1 { font-size: 1.75rem; margin: 0 0 0.75rem 0; }
+    /* Pattern styles */
+    .container { display: table; width: 100%; }
+    .left-half { background-color: #a7a6a5; position: absolute; left: 0px; width: 50%; }
+    .right-half { background-color: #223e46; position: absolute; right: 0px; width: 50%; }
+    /* split screen style */
+    .buttons { margin-left: -14px; }
+    .divider{ width:5px; display:inline-block; }
+    .center { display: block; margin-left: auto; margin-right: auto; width: 50%; }
+    * { box-sizing: border-box; }
+</style>
+</head>
+
+<body>
+    <section class="container">
+
+        <div class="left-half">
+          <article>
+            <h1>Device Healer Inc.</h1>
+            <p>Device Healer is a team of four, based in the San Fernando Valley, that is dedicated towards repairing your device's issues!</p>
+            <img src="pc-repair.png" width="300" height="auto">&nbsp; 
+            <br></br>
+            <p>Must create an account to begin consultation. </p>
+            <p>If you have not made an account with us please sign up below!</p>
+            
+            <!-- Create Account button -->
+            <form action="/create-acccount.html" method="post">
+                <input name="verify" type="submit" value="Sign-Up" class="buttons">
+            </form>
+
+          </article>
+        </div>
+
+        <div class="right-half">
+        <article>
+            <h2>Member Login</h2><p>
+
+            <!-- Login button  -->
+		    <form action="home.php" method="post">
+                <div class="form-group">
+                    <label>Username/Email</label>
+                    <input type="text" name="username" class="form-control " value="">
+                    <span class="invalid-feedback">  </span>
+                </div>
+
+                <div class="form-group"><label>Password</label>
+                    <input type="password" name="password" class="form-control" value="">
+                    <span class="invalid-feedback">  </span>
+                </div>
+
+                <input name="submit" type="submit" onclick="return validate();" value="Login" class="butons"> 
+
+            </form>
+            <br>&nbsp;
+            <!-- Reset Username button -->
+            <form action="/reset-username.php" method="post"></form>
+            <td><label>To reset your username: </label>&nbsp;&nbsp;&nbsp;&nbsp;<input name="resetUser" type="submit" value="Forgot Username" class="buttons"></td> &nbsp;
+            </form><br></br>
+
+            <!-- Reset Password Button -->
+            <form action="/reset-password.php" method="post"></form>
+		    <td><label>To reset your password: </label>&nbsp;&nbsp;&nbsp;&nbsp;<input name="resetPassword" type="submit" value="Forgot Password" class="buttons" ></td> &nbsp;
+            
+            </form>
+        </div>
+
+    </section>
+
+    <head>
+      <meta charset="utf-8">
+      <script type='text/javascript'>
+        function refreshCaptcha() {
+          var img = document.images['captchaimg'];
+          img.src = img.src.substring(0, img.src.lastIndexOf("?")) + "?rand=" + Math.random() * 1000;
+        }
+      </script>
+    </head>
+  </body>
+</html>
