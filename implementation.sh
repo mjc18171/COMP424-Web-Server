@@ -15,7 +15,7 @@ sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
 
 #allow all incoming ssh
 sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
-sudo iptables -A OUTPUT -p tcp --sport 22 -m conntack --ctstate ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
 
 
 #allow all incoming HTTP and HTTPS
