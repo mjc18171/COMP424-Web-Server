@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo ""
+echo "Implement ipTables"
+echo "========================================================================================"
 #To accept all traffic on your loopback interfacae
 sudo iptables -A INPUT -i lo -j ACCEPT
 sudo iptables -A OUTPUT -o lo -j ACCEPT
@@ -30,9 +33,44 @@ sudo iptables -A OUTPUT -p tcp --sport 25 -m conntrack --ctstate ESTABLISHED -j 
 #Persisting Changes - every time you change rules you need to save to it can reload at reboot
 sudo netfilter-persistent save
 
+echo ""
 echo "iptables implemention completed"
+echo ""
 
+sleep 3
+
+echo ""
+echo "Configuring network interface for snort"
+echo "========================================================================================"
+# generic-receive-offliad: on
+# large-receive-offload: off [fixed]
+sudo ethtool -k eth0 | grep receive-offload
+
+sudo touch /lib/systemd/system/ethtool.service
+
+echo "[Unit]
+Description=Ethtool Configration for Network Interface
+[Service]
+Requires=network.target
+Type=oneshot
+ExecStart=/sbin/ethtool -K eth0 gro off
+ExecStart=/sbin/ethtool -K eth0 lro off
+[Install]
+WantedBy=multi-user.target" > /lib/systemd/system/ethtool.service
+
+echo "Successfully added network interface information in /lib/systemd/system/ethtool.service"
+
+echo "Attempting to enable and restart ethtool service"
+# Enable and restart ethtool service
+sudo systemctl enable ethtool
+sudo service ethtool start
+echo ""
+
+sleep 3
+
+echo ""
 echo "Configuring snort"
+echo "========================================================================================"
 # Create directories
 sudo mkdir /usr/local/etc/rules
 sudo mkdir /usr/local/etc/so_rules/
@@ -45,15 +83,16 @@ sudo mkdir /var/log/snort
 sudo touch /usr/local/etc/rules/local.rules
 
 # This rule will detect ICMP trc, and is really good for testing that Snort is working correctly and generating alerts
-sudo echo alert icmp any any -> any any ( msg:"ICMP Traffic Detected"; sid:10000001; metadata:policy security-ips alert; ) > /usr/local/etc/rules/local.rules
+echo "alert icmp any any -> any any ( msg:"ICMP Traffic Detected"; sid:10000001; metadata:policy security-ips alert; )" > /usr/local/etc/rules/local.rules
 
 # Run Snort and have it load the local.rules file (with the -R flag) to make sure it loads these rules correctly
 # The output should end with “Snort successfully validated the configuration” 
+echo "Attempting to run snort"
 snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules
 
 # run Snort in detection mode on an interface (change eth0 below to match your interface name), and print all alerts to the console
-#sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules \
-#	-i eth0 -A alert_fast -s 65535 -k none
+sudo snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules \
+	-i eth0 -A alert_fast -s 65535 -k none
 # (run command above to receive an output of ICMP alerts)
 
 # edit the snort.lua at line 169
@@ -75,6 +114,32 @@ snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/rules/local.rules
 echo "Please follow the rest of the instructions for the snort configuration"
 
 echo "Snort and iptables implementation completed"
+
+sleep 3
+
+echo ""
+echo "Configuring PulledPork3"
+echo "========================================================================================"
+echo ""
+echo "Copying pulledpork.conf to pulledpork3 install location"
+sudo scp /mnt/backups/COMP424-Web-Server/pulledpork.conf /usr/local/etc/pulledpork3/
+
+echo "Attmepting to run PulledPork3"
+sudo /usr/local/bin/pulledpork3/pulledpork.py -c /usr/local/etc/pulledpork3/pulledpork.conf
+
+echo "Copying snort.lua to snort install location"
+sudo scp /mnt/backups/COMP424-Web-Server/snort.lua  /usr/local/etc/snort/
+
+echo "Copying pulledpork3.service"
+sudo scp /mnt/backups/COMP424-Web-Server/pulledpork3.service /lib/systemd/system/
+
+echo "Copying pulledpork3.timer"
+sudo scp /mnt/backups/COMP424-Web-Server/pulledpork3.timer  /lib/systemd/system/
+
+echo "Enabling pulledpork3 timer"
+sudo systemctl enable pulledpork3.timer
+
+echo "Pulledpork3 configuration complete"
 
 echo ""
 exit 0
