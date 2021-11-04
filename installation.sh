@@ -6,6 +6,8 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 echo ""
 
+sleep 3
+
 echo ""
 echo "Create Team Users and grant root privileges"
 echo "========================================================================================"
@@ -29,11 +31,15 @@ cp .keys/martini.pub /home/msn60002/.ssh
 cp .keys/authorized_keys /root/.ssh
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing Apache2 Web server"
 echo "========================================================================================"
 sudo apt-get install apache2 -y
 echo "" 
+
+sleep 3
 
 echo ""
 echo "Installing MySQL"
@@ -46,6 +52,8 @@ echo "exit"
 #copy apache2 config file
 cp .apache2_files/apache2.conf /etc/apache2
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing PHP"
@@ -70,6 +78,8 @@ sudo apt-get install php -y
 #add php files to /var/www/html unless you alias/redirect to it
 echo ""
 
+sleep 3
+
 echo ""
 echo "Enabling Modules"
 echo "========================================================================================"
@@ -78,17 +88,23 @@ sudo a2enmod ssl
 sudo a2ensite default-ssl
 echo ""
 
+sleep 3
+
 echo ""
 echo "Restarting Apache"
 echo "========================================================================================"
 sudo service apache2 restart
 echo "" 
 
+sleep 3
+
 echo ""
 echo "Installing iptables"
 echo "========================================================================================"
 sudo apt-get install iptables
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing OpenSSH"
@@ -98,11 +114,15 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing wget"
 echo "========================================================================================"
 apt-get install wget
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing make"
@@ -110,11 +130,15 @@ echo "==========================================================================
 sudo apt-get install -y make
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing cmake"
 echo "========================================================================================"
 sudo apt-get -y install cmake
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing Python 2.7"
@@ -124,6 +148,8 @@ sudo apt update
 sudo apt install python2-minimal -y
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing Perl Compatible Regular Expression"
 echo "========================================================================================"
@@ -131,10 +157,14 @@ apt-get update
 apt-get install libpcre3 libpcre3-dev -y
 echo ""
 
+sleep 3
+
 echo ""
 echo "Time to install snort!"
 echo "========================================================================================"
 echo ""
+
+sleep 3
 
 echo ""
 echo "Creating Snort src dir"
@@ -144,6 +174,8 @@ mkdir ~/snort_src
 cd ~/snort_src
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing Snort Prereqs"
 echo "========================================================================================"
@@ -152,6 +184,8 @@ sudo apt-get install -y build-essential autotools-dev libdumbnet-dev libluajit-5
 	libtool uuid-dev git autoconf bison flex libcmocka-dev libnetfilter-queue-dev libunwind-dev \
 	libmnl-dev ethtool
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing safec for runtime bounds checks"
@@ -165,6 +199,8 @@ make
 sudo make install
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing Perl Compatible Regular Expressions"
 echo "========================================================================================"
@@ -176,6 +212,8 @@ cd pcre-8.45
 make
 sudo make install
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing gperftools 2.9"
@@ -189,6 +227,8 @@ make
 sudo make install
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing Ragel"
 echo "========================================================================================"
@@ -201,6 +241,8 @@ make
 sudo make install
 echo ""
 
+sleep 3
+
 echo ""
 echo "Downloading Boost C++ libraries"
 echo "========================================================================================"
@@ -208,6 +250,8 @@ cd ~/snort_src
 wget https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz
 tar -xvzf boost_1_76_0.tar.gz
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing Hyperscan 5.4"
@@ -222,6 +266,8 @@ make
 sudo make install
 echo ""
 
+sleep 3
+
 echo ""
 echo "Installing flatbuffers"
 echo "========================================================================================"
@@ -234,6 +280,8 @@ cmake ../flatbuffers-2.0.0
 make
 sudo make install
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing Data Acquisition library"
@@ -248,11 +296,15 @@ make
 sudo make install
 echo ""
 
+sleep 3
+
 echo ""
 echo "Updating shares libraries"
 echo "========================================================================================"
 sudo ldconfig
 echo ""
+
+sleep 3
 
 echo ""
 echo "Installing Snort 3"
@@ -267,11 +319,15 @@ make
 sudo make install
 echo ""
 
+sleep 3
+
 echo ""
 echo "Confirm snort version"
 echo "========================================================================================"
 /usr/local/bin/snort -V
 echo ""
+
+sleep 3
 
 echo ""
 echo "testing snort with the default config file"
@@ -279,6 +335,7 @@ echo "==========================================================================
 snort -c /usr/local/etc/snort/snort.lua
 echo ""
 
+sleep 3
 
 echo ""
 echo ""
