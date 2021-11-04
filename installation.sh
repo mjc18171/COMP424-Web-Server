@@ -4,36 +4,38 @@ echo "Updating Apt Packages and upgrading latest patches"
 echo "========================================================================================"
 sudo apt-get update -y 
 sudo apt-get upgrade -y
+echo ""
 
+echo ""
 echo "Create Team Users and grant root privileges"
 echo "========================================================================================"
-sudo adduser mjc18171
+sudo adduser --disabled-password mjc18171
 sudo usermod -aG sudo mjc18171
-sudo passwd --delete mjc18171
 cp .keys/id_ed25519.pub /home/mjc18171/.ssh
  
-sudo adduser stefk
+sudo adduser --disabled-password stefk
 sudo usermod -aG sudo stefk
-sudo passwd --delete stefk
 cp .keys/stef.pub /home/stefk/.ssh
  
-sudo adduser krr74113
+sudo adduser --disabled-password krr74113
 sudo usermod -aG sudo krr74113
-sudo passwd --delete krr74113
 cp .keys/kim.pub /home/krr74113/.ssh
  
-sudo adduser msn60002
+sudo adduser --disabled-password msn60002
 sudo usermod -aG sudo msn60002
-sudo passwd --delete msn60002
 cp .keys/martini.pub /home/msn60002/.ssh
 
 #cp authorized keys into root
 cp .keys/authorized_keys /root/.ssh
- 
+echo ""
+
+echo ""
 echo "Installing Apache2 Web server"
 echo "========================================================================================"
 sudo apt-get install apache2 -y
- 
+echo "" 
+
+echo ""
 echo "Installing MySQL"
 echo "========================================================================================"
 sudo apt-get install mysql-server -y
@@ -43,7 +45,9 @@ echo "exit"
 
 #copy apache2 config file
 cp .apache2_files/apache2.conf /etc/apache2
+echo ""
 
+echo ""
 echo "Installing PHP"
 echo "========================================================================================"
 #this is install will prompt you, select apache2
@@ -64,55 +68,77 @@ echo "exit"
 
 sudo apt-get install php -y
 #add php files to /var/www/html unless you alias/redirect to it
+echo ""
 
+echo ""
 echo "Enabling Modules"
 echo "========================================================================================"
 sudo a2enmod alias
 sudo a2enmod ssl
 sudo a2ensite default-ssl
- 
+echo ""
+
+echo ""
 echo "Restarting Apache"
 echo "========================================================================================"
 sudo service apache2 restart
- 
+echo "" 
+
+echo ""
 echo "Installing iptables"
 echo "========================================================================================"
 sudo apt-get install iptables
+echo ""
 
+echo ""
 echo "Installing OpenSSH"
 echo "========================================================================================"
 sudo apt-get install openssh-server
 sudo systemctl enable ssh
 sudo systemctl start ssh
+echo ""
 
+echo ""
 echo "Installing wget"
 echo "========================================================================================"
 apt-get install wget
+echo ""
 
+echo ""
 echo "Installing make"
 echo "========================================================================================"
 sudo apt-get install -y make
+echo ""
 
+echo ""
 echo "Installing cmake"
 echo "========================================================================================"
 sudo apt-get -y install cmake
+echo ""
 
+echo ""
 echo "Time to install snort!"
 echo "========================================================================================"
+echo ""
 
+echo ""
 echo "Creating Snort src dir"
 echo "========================================================================================"
 sudo dpkg-reconfigure tzdata
 mkdir ~/snort_src
 cd ~/snort_src
+echo ""
 
+echo ""
 echo "Installing Snort Prereqs"
 echo "========================================================================================"
 sudo apt-get install -y build-essential autotools-dev libdumbnet-dev libluajit-5.1-dev libpcap-dev \
 	zlib1g-dev pkg-config libhwloc-dev cmake liblzma-dev openssl libssl-dev cpputest libsqlite3-dev \
 	libtool uuid-dev git autoconf bison flex libcmocka-dev libnetfilter-queue-dev libunwind-dev \
 	libmnl-dev ethtool
+echo ""
 
+echo ""
 echo "Installing safec for runtime bounds checks"
 echo "========================================================================================"
 cd ~/snort_src
@@ -122,7 +148,9 @@ cd libsafec-02092020.0-g6d921f
 ./configure
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Installing Perl Compatible Regular Expressions"
 echo "========================================================================================"
 cd ~/snort_src/
@@ -132,7 +160,9 @@ cd pcre-8.45
 ./configure
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Installing gperftools 2.9"
 echo "========================================================================================"
 cd ~/snort_src
@@ -142,7 +172,9 @@ cd gperftools-2.9.1
 ./configure
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Installing Ragel"
 echo "========================================================================================"
 cd ~/snort_src
@@ -152,13 +184,17 @@ cd ragel-6.10
 ./configure
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Downloading Boost C++ libraries"
 echo "========================================================================================"
 cd ~/snort_src
 wget https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz
 tar -xvzf boost_1_76_0.tar.gz
+echo ""
 
+echo ""
 echo "Installing Hyperscan 5.4"
 echo "========================================================================================"
 cd ~/snort_src
@@ -169,7 +205,9 @@ cd hyperscan-5.4.0-build/
 cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DBOOST_ROOT=~/snort_src/boost_1_76_0/ ../hyperscan-5.4.0
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Installing flatbuffers"
 echo "========================================================================================"
 cd ~/snort_src
@@ -180,7 +218,9 @@ cd flatbuffers-build
 cmake ../flatbuffers-2.0.0
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Installing Data Acquisition library"
 echo "========================================================================================"
 cd ~/snort_src
@@ -191,11 +231,15 @@ cd libdaq-3.0.4
 ./configure
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Updating shares libraries"
 echo "========================================================================================"
 sudo ldconfig
+echo ""
 
+echo ""
 echo "Installing Snort 3"
 echo "========================================================================================"
 cd ~/snort_src
@@ -206,13 +250,25 @@ cd snort3-3.1.6.0
 cd build
 make
 sudo make install
+echo ""
 
+echo ""
 echo "Confirm snort version"
 echo "========================================================================================"
 /usr/local/bin/snort -V
+echo ""
 
+echo ""
 echo "testing snort with the default config file"
 echo "========================================================================================"
 snort -c /usr/local/etc/snort/snort.lua
+echo ""
+
+
+echo ""
+echo ""
+echo "Installation.sh complete!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo ""
+echo ""
 
 exit 0
