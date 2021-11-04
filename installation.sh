@@ -12,16 +12,16 @@ cp .keys/id_ed25519.pub /home/mjc18171/.ssh
  
 sudo adduser stefk
 sudo usermod -aG sudo stefk
-passwd --delete steff
+passwd --delete stefk
 cp .keys/stef.pub /home/stefk/.ssh
  
 sudo adduser krr74113
-sudo usermod -aG sudo
+sudo usermod -aG sudo krr74113
 passwd --delete krr74113
 cp .keys/kim.pub /home/krr74113/.ssh
  
 sudo adduser msn60002
-sudo usermod -aG sudo
+sudo usermod -aG sudo msn60002
 passwd --delete msn60002
 cp .keys/martini.pub /home/msn60002/.ssh
 
