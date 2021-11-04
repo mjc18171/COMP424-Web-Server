@@ -122,7 +122,7 @@ echo "Configuring PulledPork3"
 echo "========================================================================================"
 echo ""
 echo "Copying pulledpork.conf to pulledpork3 install location"
-sudo scp /mnt/backups/COMP424-Web-Server/pulledpork.conf /usr/local/etc/pulledpork3/
+sudo scp /github/COMP424-Web-Server/pulledpork.conf /usr/local/etc/pulledpork3/
 
 echo "Attmepting to run PulledPork3"
 sudo /usr/local/bin/pulledpork3/pulledpork.py -c /usr/local/etc/pulledpork3/pulledpork.conf
