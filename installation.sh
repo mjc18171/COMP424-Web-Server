@@ -46,7 +46,7 @@ echo "Installing MySQL"
 echo "========================================================================================"
 sudo apt-get install mysql-server -y
 # Enter password: COMP424
-mysql -u root -p
+mysql -u root
 echo "exit"
 
 #copy apache2 config file
