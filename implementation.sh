@@ -128,13 +128,13 @@ echo "Attmepting to run PulledPork3"
 sudo /usr/local/bin/pulledpork3/pulledpork.py -c /usr/local/etc/pulledpork3/pulledpork.conf
 
 echo "Copying snort.lua to snort install location"
-sudo scp /mnt/backups/COMP424-Web-Server/snort.lua  /usr/local/etc/snort/
+sudo scp /github/COMP424-Web-Server/snort.lua  /usr/local/etc/snort/
 
 echo "Copying pulledpork3.service"
-sudo scp /mnt/backups/COMP424-Web-Server/pulledpork3.service /lib/systemd/system/
+sudo scp /github/COMP424-Web-Server/pulledpork3.service /lib/systemd/system/
 
 echo "Copying pulledpork3.timer"
-sudo scp /mnt/backups/COMP424-Web-Server/pulledpork3.timer  /lib/systemd/system/
+sudo scp /github/COMP424-Web-Server/pulledpork3.timer  /lib/systemd/system/
 
 echo "Enabling pulledpork3 timer"
 sudo systemctl enable pulledpork3.timer
