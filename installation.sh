@@ -117,12 +117,6 @@ sudo apt-get -y install cmake
 echo ""
 
 echo ""
-echo" Installing Boost"
-echo "========================================================================================"
-sudo apt-get install libboost-all-dev
-echo ""
-
-echo ""
 echo "Installing Python 2.7"
 echo "========================================================================================"
 sudo apt-add-repository universe
