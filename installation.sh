@@ -33,7 +33,9 @@ sudo apt-get install apache2 -y
  
 echo "Installing MySQL"
 sudo apt-get install mysql-server -y
+# Enter password: COMP424
 mysql -u root -p
+echo "exit"
 
 #copy apache2 config file
 cp .apache2_files/apache2.conf /etc/apache2
@@ -43,16 +45,18 @@ echo "Installing PHP"
 #this is install will prompt you, select apache2
 #another prompt will come up, select yes
 sudo apt-get install phpmyadmin -y
+# Select apache2
 mysql -u root -p
 
 #copy php apache2 config file
 cp .php_files/php.ini /etc/php/7.4/apache2
 
 #create an admin account to access phpmyadmin
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'COMP424';
-GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';
-FLUSH PRIVILEGES;
-exit
+# Select YES when prompted
+echo "CREATE USER 'admin'@'localhost' IDENTIFIED BY 'COMP424';"
+echo "GRANT ALL PRIVILEGES ON * . * TO 'admin'@'localhost';"
+echo "FLUSH PRIVILEGES;"
+echo "exit"
 
 sudo apt-get install php -y
 #add php files to /var/www/html unless you alias/redirect to it
