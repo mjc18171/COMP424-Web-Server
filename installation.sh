@@ -1,5 +1,6 @@
 #!/bin/bash
- 
+
+echo ""
 echo "Updating Apt Packages and upgrading latest patches"
 echo "========================================================================================"
 sudo apt-get update -y 
