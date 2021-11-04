@@ -359,6 +359,12 @@ sudo cp etc/pulledpork.conf /usr/local/etc/pulledpork3/
 echo "Verifying PulledPork3"
 echo ""
 /usr/local/bin/pulledpork3/pulledpork.py -V
+echo ""
+
+echo ""
+echo "Installing PHP Mailer"
+echo "========================================================================================"
+# Insert code here
 echo""
 
 echo ""
