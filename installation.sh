@@ -7,22 +7,22 @@ sudo apt-get upgrade -y
 echo "Create Team Users and grant root privileges"
 sudo adduser mjc18171
 sudo usermod -aG sudo mjc18171
-passwd --delete mjc18171
+sudo passwd --delete mjc18171
 cp .keys/id_ed25519.pub /home/mjc18171/.ssh
  
 sudo adduser stefk
 sudo usermod -aG sudo stefk
-passwd --delete stefk
+sudo passwd --delete stefk
 cp .keys/stef.pub /home/stefk/.ssh
  
 sudo adduser krr74113
 sudo usermod -aG sudo krr74113
-passwd --delete krr74113
+sudo passwd --delete krr74113
 cp .keys/kim.pub /home/krr74113/.ssh
  
 sudo adduser msn60002
 sudo usermod -aG sudo msn60002
-passwd --delete msn60002
+sudo passwd --delete msn60002
 cp .keys/martini.pub /home/msn60002/.ssh
 
 #cp authorized keys into root
