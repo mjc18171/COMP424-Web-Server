@@ -117,6 +117,27 @@ sudo apt-get -y install cmake
 echo ""
 
 echo ""
+echo" Installing Boost"
+echo "========================================================================================"
+sudo apt-get install libboost-all-dev
+echo ""
+
+echo ""
+echo "Installing Python 2.7"
+echo "========================================================================================"
+sudo apt-add-repository universe
+sudo apt update
+sudo apt install python2-minimal -y
+echo ""
+
+echo ""
+echo "Installing Perl Compatible Regular Expression"
+echo "========================================================================================"
+apt-get update
+apt-get install libpcre3 libpcre3-dev -y
+echo ""
+
+echo ""
 echo "Time to install snort!"
 echo "========================================================================================"
 echo ""
